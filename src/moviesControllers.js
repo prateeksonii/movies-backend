@@ -1,7 +1,17 @@
 const {movies} = require('./db');
 
 exports.getMovies = (req, res) => {
-  res.json(movies)
+
+  const { id } = req.query;
+
+  if (!id) {
+    return res.json(movies);
+  }
+
+  const movie = movies.find(movie => movie.id === +id);
+  console.log(id)
+
+  res.json(movie)
 }
 
 exports.postMovie = (req, res) => {
